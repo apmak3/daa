@@ -1,0 +1,36 @@
+Tehtävä 3
+
+1.
+App luokka perii JavaFx:n application luokan, jolla on toteutettu sovelluksen toiminta.
+App luokasta kutsutaan runStatic, runDynamic tai runWot metodeja jotka luovat uudet dispatcher oliot, joissa toteutetaan sovelluksen laskenta.
+Em. oliot saavat parametrikseen ControlSet luokan, jonka avulla olio saa laskentaan tarvitsemansa tiedot ohjelmalta/käyttäjältä.
+Oliot kutsuvat worker luokan count -metodia joka kuluttaa aikaa riippuen käytössä olevista muuttujista: mikä worker-tyyppi, mikä kuorma.
+
+
+2.
+Jos tehtävien suoritusaika vaihtelee paljon dynaaminen on huomattavasti parempi, mutta jos suoritusaika on käytännössä yhtä pitkä kaikissa tehtävissä, niin staattinen ei pitäisi olla sen huonompi kuin dynaaminen.
+Testattaessa tuli ilmi että constant task tehtävää käytettäessä dynaaminen ja staattinen olivat käytäännössä yhtä nopeita, mutta dynaaminen oli kaikissa muissa tehtävissä huomattavasti nopeampi.
+Dynaaminen voi olla myös hitaampi säikeiden välisen kommunikoinnin takia, mikä ei staattisessa ole ongelma, mutta tämä ei vaikuttanut threadrunner ohjelmaa testattaessa vaikuttavan nopeuteen.
+
+
+
+3.
+Jos ajatellaan, että koneella tehdään myös samanaikaisesti jotain muuta, niin voisi olla järkevää käyttää yhtä säiettä graafiseen käyttöliittymään, kahta muihin ohjelmiin ja loppuja raskaaseen laskentaan tarpeen mukaisesti
+Täten voitaisiin välttyä hyvin hitaalta toiminnalta muiden ohjelmien osalta. Toisaalta jos ainoa prioriteetti on raskas laskenta, niin voitaisiin käyttää vain yhtä muihin ohjelmiin ja kuutta raskaaseen laskentaan.
+
+
+4.
+Pitkiä toimintoja tekevät luokat säikeiksi
+-> säikeitä valmistavat luokat säikeiksi ( Dispatcher luokat)
+
+Run[no/static/dynamic] aloittaa uuden säikeen.
+
+class dispatcherThread extends Thread(){
+	run(){}
+	public static void run[Dynamic/Static/Wot](Cotrolset controlset){}
+}
+
+1. Tutustukaa Threadrunner-ohjelman rakenteeseen. Selostakaa lyhyesti, miten ohjelman suoritus kulkee.
+2. Missä tilanteessa on järkevää käyttää staattista jakoa ja missä dynaamista? Onko tilanteita, jossa on samantekevää, kumpi valintaan? Entä on tilanteita, joissa toinen on selvästi järkevämpi valinta?
+3. Oletetaan, että koneessa voidaan ajaa 8 säiettä aidosti samanaikaisina. Ajatellaan graafisella käyttöliittymällä varustettua ohjelmaa, joka suorittaa raskasta laskentaa säikeissä. Koneessa ajataan samanaikaisesti myös muita ohjelmia. Montako samanaikaista säiettä on järkevää käyttää? Perustele.
+4. Threadrunner-ohjelman käyttöliittymä odottaa säikeiden valmistumista eikä vastaa sillä aikaa käytäjän pyyntöihin eli on toisin sanoen aivan jumissa. Miten ohjelmaa olisi järkevää muuttaa, jotta käyttöliittymä olisi kokoajan käytössä? Kuvatkaa vastaukseen tarvittavat luokat ja niiden metodit. Metodien toteuksia ei tarvitse tehdä.
